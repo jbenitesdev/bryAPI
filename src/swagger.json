@@ -1,0 +1,356 @@
+{
+    "openapi":"3.0.0",
+    "info": {
+        "title":"API BRY r",
+        "description": "API Crud",
+        "version":"1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://localhost:3000"
+        }
+    ],
+    "paths":{
+        "/funcionario":{
+            "post": {
+                "summary":"Cadastro de Funcionario e Empresa",
+                "description": "Irá cadastrar 1 ou mais funcionarios, 1 ou mais empresas",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Funcionario"
+                            },
+                            "examples":{
+                                "funcionario":{
+                                    "value":[{
+                                        "nome":"Teste Bry",
+                                        "email":"teste.bry@bry.com.br",
+                                        "cpf":"1231231231",
+                                        "endereco":"Rua Lauro Linhares",
+                                        "empresa":[{
+                                            "nome":"bentech",
+                                            "cnpj":"1231231231",
+                                            "endereco":"Rua Lauro Linhares"
+                                        }]
+                                    }]
+                                    
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Funcionario"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível adicionar funcionário"
+                    }
+                }
+            },
+            "get":{
+                "summary":"Consulta relacional",
+                "description": "Irá realizar a consulta de funcionario",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Funcionario"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível consultar funcionário"
+                    }
+                }
+            }
+        },
+        "/funcionario/{id}":{
+            "delete":{
+                "summary":"Delete funcionario",
+                "description": "Irá deletar o funcionário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type":"integer",
+                        "description": "Id do funcionário que será removido"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Funcionario"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível excluir funcionário"
+                    }
+                }
+            },
+            "put": {
+                "summary":"Alterar funcionario",
+                "description": "Irá alterar o funcionário",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type":"integer",
+                        "description": "Id do funcionário que será removido"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Funcionario"
+                            },
+                            "examples":{
+                                "funcionario":{
+                                    "value":{
+                                        "nome":"Teste Bry Novo",
+                                        "email":"teste.bry@bry.com",
+                                        "cpf":"123123123123",
+                                        "endereco":"Rua Lauro Linhares"
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Funcionario"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível adicionar funcionário"
+                    }
+                }
+            }
+        },
+        "/empresa":{
+            "post": {
+                "summary":"Cadastro de Empresa e Funcionario",
+                "description": "Irá cadastrar 1 ou mais empresa, 1 ou mais funcionarios",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Empresa"
+                            },
+                            "examples":{
+                                "empresa":{
+                                    "value":[{
+                                        "nome":"Empresa Teste Bry",
+                                        "cnpj":"123123123123",
+                                        "endereco":"Rua Lauro Linhares",
+                                        "funcionario":[{
+                                            "nome":"Teste Bry",
+                                            "email":"teste.bry@bry.com.br",
+                                            "cpf":"1231231231",
+                                            "endereco":"Rua Lauro Linhares"
+                                        }]
+                                    }]
+                                    
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Empresa"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível adicionar empresa"
+                    }
+                }
+            },
+            "get":{
+                "summary":"Consulta relacional",
+                "description": "Irá realizar a consulta da empresa",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Empresa"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível adicionar Empresa"
+                    }
+                }
+            }
+        },
+        "/empresa/{id}":{
+            "delete":{
+                "summary":"Delete empresa",
+                "description": "Irá deletar a empresa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type":"integer",
+                        "description": "Id da empresa que será removida"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Empresa"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível excluir empresa"
+                    }
+                }
+            },
+            "put": {
+                "summary":"Alterar empresa",
+                "description": "Irá alterar a empresa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "type":"integer",
+                        "description": "Id da empresa que será removida"
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Empresa"
+                            },
+                            "examples":{
+                                "empresa":{
+                                    "value":{
+                                        "nome":"Empresa Bry Novo",
+                                        "cnpj":"000000554155",
+                                        "endereco":"Rua Lauro Linhares"
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json" : {
+                                "schema":"object",
+                                "$ref":"#/components/schemas/Empresa"
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Não foi possível alterar empresa"
+                    }
+                }
+            }
+        }
+       
+    },
+    "components":{
+        "schemas":{
+            "Funcionario":{
+                "type":"object",
+                "properties":{
+                    "nome":{
+                        "type":"string"
+                    },
+                    "email":{
+                        "type":"string"
+                    },
+                    "cpf":{
+                        "type":"string"
+                    },
+                    "endereco":{
+                        "type":"string"
+                    },
+                    "empresa":{
+                        "type":"object",
+                        "properties":{
+                            "nome":{
+                                "type":"string"
+                            },
+                            "cnpj":{
+                                "type":"string"
+                            },
+                            "endereco":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }
+            },
+            "Empresa":{
+                "type":"object",
+                "properties":{
+                    "nome":{
+                        "type":"string"
+                    },
+                    "cnpj":{
+                        "type":"string"
+                    },
+                    "endereco":{
+                        "type":"string"
+                    },
+                    "funcionario":{
+                        "type":"object",
+                        "properties":{
+                            "nome":{
+                                "type":"string"
+                            },
+                            "email":{
+                                "type":"string"
+                            },
+                            "cpf":{
+                                "type":"string"
+                            },
+                            "endereco":{
+                                "type":"string"
+                        }
+                    }
+                }
+                }
+            }
+        }
+    }
+    
+}
